@@ -1,40 +1,88 @@
-﻿using CMS.Core.Models;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using CMS.Core.Models;
 using CMS.Core.Repositories;
+using CMS.Repositories.DataBase;
 using CMS.Repositories.Entities;
 
 namespace CMS.Repositories
 {
     public class TeacherRepository : ITeacherRepository
     {
-        public Task AddTeacherAsync(TeacherDto teacherDto)
+        private readonly CMSDbContext _context;
+
+        public TeacherRepository()
         {
-            Teacher teacher = new Teacher()
+            _context = new CMSDbContext();
+        }
+
+        private TeacherDto ToDto(Teacher teacher)
+        {
+            return new TeacherDto(teacher.Id, teacher.Name, teacher.Description, teacher.Type);
+        }
+
+        private Teacher ToEntity(TeacherDto teacherDto)
+        {
+            return new Teacher
             {
                 Id = teacherDto.Id,
                 Name = teacherDto.Name,
+                Description = teacherDto.Description,
+                Type = teacherDto.Type
             };
-           // DbContext.Teachers.Add(teacher);
-            throw new NotImplementedException();
         }
 
-        public Task DeleteTeacherAsync(TeacherDto teacher)
+        public async Task AddTeacherAsync(TeacherDto teacherDto)
         {
-            throw new NotImplementedException();
+            var teacher = new Teacher
+            {
+                Name = teacherDto.Name,
+                Description = teacherDto.Description,
+                Type = teacherDto.Type
+            };
+            _context.Teachers.Add(teacher);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<List<TeacherDto>> GetStudentsAsync()
+        public async Task DeleteTeacherAsync(int id)
         {
-            throw new NotImplementedException();
+            var teacher = await _context.Teachers.FindAsync(id);
+            if (teacher != null)
+            {
+                _context.Teachers.Remove(teacher);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<List<TeacherDto>> GetTeacherAsync()
+        public async Task<List<TeacherDto>> GetTeachersAsync()
         {
-            throw new NotImplementedException();
+            var teachers = await _context.Teachers.ToListAsync();
+            return teachers.Select(t => ToDto(t)).ToList();
         }
 
-        public Task UpdateTeacherAsync(TeacherDto teacher)
+        public async Task<TeacherDto> GetTeacherByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var teacher = await _context.Teachers.FindAsync(id);
+            return teacher != null ? ToDto(teacher) : null;
+        }
+
+        public async Task UpdateTeacherAsync(TeacherDto teacherDto)
+        {
+            var existingTeacher = await _context.Teachers.FindAsync(teacherDto.Id);
+            if (existingTeacher != null)
+            {
+                // Update the properties of the existing entity
+                existingTeacher.Name = teacherDto.Name;
+                existingTeacher.Description = teacherDto.Description;
+                existingTeacher.Type = teacherDto.Type;
+
+                // Mark the entity as modified
+                _context.Entry(existingTeacher).State = EntityState.Modified;
+
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
