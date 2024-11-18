@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS", "CMS\CMS.csproj", "{8ADF6BC5-3623-4100-8D85-2AE48080F497}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMS", "CMS\CMS.csproj", "{8ADF6BC5-3623-4100-8D85-2AE48080F497}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Services", "CMS.Services\CMS.Services.csproj", "{892F19D3-2DFB-42E3-9055-531F4257452A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMS.Services", "CMS.Services\CMS.Services.csproj", "{892F19D3-2DFB-42E3-9055-531F4257452A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Repositories", "CMS.DAL\CMS.Repositories.csproj", "{1DE19EEE-5182-488E-811E-21E057BB4C47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMS.Repositories", "CMS.DAL\CMS.Repositories.csproj", "{1DE19EEE-5182-488E-811E-21E057BB4C47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Core", "CMS.Core\CMS.Core.csproj", "{59B00FBB-D7A7-47BB-BBAC-5ED0EFC42EE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMS.Core", "CMS.Core\CMS.Core.csproj", "{59B00FBB-D7A7-47BB-BBAC-5ED0EFC42EE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

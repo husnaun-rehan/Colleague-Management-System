@@ -11,5 +11,7 @@ namespace CMS.Core.Interfaces
 
         Task UpdateTeacherAsync(TeacherDto teacher);
         Task DeleteTeacherAsync(TeacherDto teacher);
+        Task DeleteTeacherAsync(int deleteId);
+        Task<TeacherDto> GetTeacherByIdAsync(int updateId);
     }
 }
